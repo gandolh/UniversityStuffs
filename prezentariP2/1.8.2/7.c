@@ -1,59 +1,58 @@
 #include <stdio.h>
-
-// nu am gasit un tip de date pentru lista in c asa ca imi fac una
-
-struct List
-{
-    struct List *next;
-    int val;
-};
-struct List * ListHead=NULL;
-struct List * ListFoot=NULL;
-void printList()
-{
-    // while (list != NULL)
-    // {
-    //     printf("%d", list->val);
-    //     list=list->next;
-    // }
-    printf("%d %d", ListHead->val,ListHead->next->val);
-}
-
-void insertFirst(int sum)
-{
-    // printf("%d",sum);
-    struct List *newEl;
-    newEl->val = sum;
-    newEl->next = NULL;
-    if(ListHead == NULL){
-        ListHead=newEl;
-        ListFoot = ListHead;
-    }
-    else {
-        ListFoot->next=newEl; 
-        ListFoot = ListFoot->next;
-    } 
-}
+#include <math.h>
+//https://stepik.org/lesson/308978/step/2?unit=291103 -- problema 7
+/*
+primul numar este cerinta ce va fi rezolvata
+in cazul cerintei 1:
+    al 2lea numar introdus este lungimea drumului
+    urmeaza 'lungime numere' ce reprezinta directia la fiecare pas al drumului.
+in cazul cerintei 2:
+    se cere un numar pentru care sa se calculeze drumul de cost
+    maxim
+*/
 
 int main()
 {
-    int lungime, d, i, sum = 1, c;
-    scanf("%d %d", &lungime, &c);
+    int lungime, d, sum, i, c;
+    scanf("%d", &c);
     if (c == 1)
     {
+        /*
+        Observam ca in coborare numarul ce urmeaza va fi
+        indicele liniei -1 daca directia este stanga,
+        -0 in caz
+        */
+        sum = 1;
+        scanf("%d", &lungime);
         for (i = 1; i <= lungime; i++)
         {
             scanf("%d", &d);
             sum += (i + 1) - (d == 1 ? 1 : 0);
-            insertFirst(sum);
         }
-        printList();
+        printf("%d\n", sum);
     }
     else
     {
-        i = 2;
+        /*
+        Cata bataie de cap mi-a dat dar:
+        notam cu l linia pe care se afla elementul K si c numarul de ordine
+        de pe linia respectiva.
+        Costul maxim al traseului este format din suma valorilor maxime de pe liniile 1,2,...,c
+        si a valorilor de pe pozitia c din liniile c+1,c+2...,l
+        */
+        scanf("%d", &d);
+        sum = 0;
+        double result = (-1 + sqrt(1 + 8 * d)) / 2 + 1;
+        int l = result;
+        if (result == (int)result)
+            l--;
+        int c = d - (l * (l - 1) / 2);
+        for (i = 1; i <= c; i++)
+            sum += (i * (i + 1) / 2);
+         for ( i = c+1; i <= l; i++)
+            sum= sum+ (i * (i -1) / 2) + c;
+        printf("%d\n", sum);
     }
-
-    printf("%d\n", sum);
+    //suprins,dar merge.
     return 0;
 }
