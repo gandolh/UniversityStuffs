@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-
+//i really should get some sleep...
 
 int sumCif(n){
     if(n<10)return n;
