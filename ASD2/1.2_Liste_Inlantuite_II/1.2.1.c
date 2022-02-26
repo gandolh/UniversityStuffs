@@ -10,7 +10,7 @@ typedef struct Product
 
 Product createProduct(int code, char *name, float price, int quantity, char *recDate, char *expDate)
 {
-    //Product *prod_addr=  (Product *)malloc(sizeof(Product));
+    // Product *prod_addr=  (Product *)malloc(sizeof(Product));
     Product product;
     product.code = code;
     strcpy(product.name, name);
@@ -46,34 +46,40 @@ void appendSorted(List *l, Product p)
     Node *current = l->head;
     Node *newElement = (Node *)malloc(sizeof(Node));
     newElement->val = p;
-    if(l->head==NULL){
-    newElement->next=NULL;
-    l->head= newElement;
+    if (l->head == NULL)
+    {
+        newElement->next = NULL;
+        l->head = newElement;
         return;
     }
     // printf("#3 flag\n");
-    
+
     while (current->next != NULL && p.price > current->next->val.price)
     {
         current = current->next;
     }
-    if(current!=l->head || (current!=l->head && current->val.price < newElement->val.price)){
-    Node *nextElt= current->next;
-    current->next= newElement;
-    newElement->next= nextElt;
-    }else{
-        if(current == NULL){
-        newElement->next= NULL;
-        l->head= newElement;
+    if (current != l->head || (current == l->head && current->val.price < newElement->val.price))
+    {
+        Node *nextElt = current->next;
+        current->next = newElement;
+        newElement->next = nextElt;
+    }
+    else
+    {
+        if (current == NULL)
+        {
+            newElement->next = NULL;
+            l->head = newElement;
         }
-        else{
-        newElement->next= current;
-        l->head= newElement;
+        else
+        {
+            newElement->next = current;
+            l->head = newElement;
         }
     }
-    }
+}
 
-Node * findByCode(List l, int code)
+Node *findByCode(List l, int code)
 {
 }
 void printValid(List l, char *expDate)
