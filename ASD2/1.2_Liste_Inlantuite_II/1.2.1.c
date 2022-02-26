@@ -73,7 +73,7 @@ void appendSorted(List *l, Product p)
     }
     }
 
-Node *findByCode(List l, int code)
+Node * findByCode(List l, int code)
 {
 }
 void printValid(List l, char *expDate)
