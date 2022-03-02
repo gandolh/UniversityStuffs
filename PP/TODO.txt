@@ -1,0 +1,7 @@
+#15. Flota auto
+Utilizatorul aplicației poate gestiona flota auto a unei întreprinderi.
+Aplicația permite adăugarea, actualizarea și ștergerea autoturismelor, căutarea unui autoturism și vizualizarea tuturor
+autoturismelor deținute de întreprindere. Autoturismele salvate vor include informații despre marcă, tip vehicul, număr
+de înmatriculare, etc.
+Folosiți mecanismul de manipulare a fișierelor pentru a prelua/salva datele din/în fișier. De asemenea, folosiți
+structuri de date pentru informațiile citite din fișier.
