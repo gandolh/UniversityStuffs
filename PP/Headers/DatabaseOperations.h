@@ -7,7 +7,7 @@ int AddToDatabase(Autovehicul autov) {
 	fopen_s(&fptr, DATABASE_PATH, "a+");
 	if (fptr) {
 		fseek(fptr,0, SEEK_END);
-		fprintf(fptr, "\n%s;%s;%d;%lf;%d", autov.marca,autov.tipAuto,autov.an,autov.capacitateMotor,autov.numarLocuri);
+		fprintf(fptr, "\n%d;%s;%s;%d;%.2lf;%d",autov.id, autov.marca,autov.tipAuto,autov.an,autov.capacitateMotor,autov.numarLocuri);
 		fclose(fptr);
 	}
 	return 1;
@@ -18,6 +18,7 @@ void PrintAllAutovehicles() {
 	char buffer[MAX_LEN];
 	fopen_s(&fptr, DATABASE_PATH, "a+");
 	if (fptr) {
+		fseek(fptr, 0, SEEK_SET);
 		//ignoram prima linie pentru ca e header-ul
 		fgets(buffer, MAX_LEN, fptr);
 
@@ -32,6 +33,28 @@ void PrintAllAutovehicles() {
 	}
 }
 
+
+int getAutovehiclesCount() {
+	FILE* fptr;
+	char buffer[MAX_LEN];
+	int lineCount=0;
+	fopen_s(&fptr, DATABASE_PATH, "a+");
+	if (fptr) {
+		fseek(fptr, 0, SEEK_SET);
+		while (fgets(buffer, MAX_LEN, fptr))
+		{
+			lineCount++;
+		}
+
+		fclose(fptr);
+	}
+	return lineCount;
+}
+
+
+
+
+
 void initDatabase() {
 	FILE* fptr;
 	char buffer[MAX_LEN];
@@ -41,7 +64,7 @@ void initDatabase() {
 		//ignoram prima linie pentru ca e header-ul
 		fgets(buffer, MAX_LEN, fptr);
 		if (buffer[0] == 0) { //lipseste header
-			fprintf(fptr,"marca;tipAuto;an;capacitateMotor;numarLocuri");
+			fprintf(fptr,"id;marca;tipAuto;an;capacitateMotor;numarLocuri");
 		}
 
 		fclose(fptr);

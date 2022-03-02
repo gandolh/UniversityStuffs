@@ -9,7 +9,6 @@ Flota gandolhFleet;
 
 
 
-int getAutovehiclesCount();
 void init();
 void createAutovehicle(Autovehicul* autov);
 int ValidTipAuto(char* tip);
@@ -42,7 +41,7 @@ int main() {
 		}
 		switch (optiuneSelectata[0]) {
 		case '1':
-
+			PrintAllAutovehicles();
 			break;
 		case '2':
 			break;
@@ -75,9 +74,6 @@ int main() {
 	return 0;
 }
 
-int getAutovehiclesCount() {
-	return 0;
-}
 
 void init() {
 	gandolhFleet.denumire = "Flota lui gandolh";
@@ -123,6 +119,9 @@ void createAutovehicle(Autovehicul* autov, HANDLE hConsole) {
 	autov->marca = malloc((MAX_SIZE_MARCA + 1) * sizeof(char));
 	autov->nrAuto = malloc(11 * sizeof(char));
 	char* tipAutov = malloc(11 * sizeof(char));;
+
+	autov->id = getAutovehiclesCount();
+
 
 	PrettyPrint(hConsole, "Introduceti marca autovehicului:", APP_MESSAGE_COLOR);
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);

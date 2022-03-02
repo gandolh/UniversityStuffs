@@ -1,3 +1,2 @@
-marca;tipAuto;an;capacitateMotor;numarLocuri
-BMW;B;2022;1.900000;4
-AUDI;S;2002;1.900000;2
+id;marca;tipAuto;an;capacitateMotor;numarLocuri
+1;BMW;S;2002;3.00;3
