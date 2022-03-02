@@ -29,6 +29,9 @@
     <ClInclude Include="Headers\Printings.h" />
     <ClInclude Include="Headers\Structures.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Database\autovehicles.csv" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

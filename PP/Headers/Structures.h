@@ -2,15 +2,8 @@
 
 
 
-const char* TipAlimentare[] = {
-	"Benzina",
-	"Motorina",
-	"Electric",
-	"GPL"
-};
-
 const char* TipAuto[] = {
-	"A","A1","B","B1","C","D"
+	"S","A","B","C","D","\0"
 };
 
 
@@ -20,7 +13,6 @@ typedef struct Autovehicul {
 	int an;
 	char* nrAuto;
 	double capacitateMotor;
-	char* tipAlimentare; // din TipAlimentare[]
 	int numarLocuri;
 	struct Autovehicul* next;
 }Autovehicul;

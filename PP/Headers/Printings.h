@@ -33,7 +33,7 @@ void PrettyPrint (HANDLE hConsole,const char * msg, ConsoleColors color) {
 char * GetTipuriAutovehicule( ) {
     char * result = calloc(50 , sizeof(char));
     int k = 0;
-    for (int i = 0; i < TipAuto[i] != NULL; i++)
+    for (int i = 0; TipAuto[i] != NULL; i++)
         if (result != NULL) {
             strcpy_s(result + strlen(result), 3, TipAuto[i]);
             if(TipAuto[i+1]!=NULL)

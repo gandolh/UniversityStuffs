@@ -33,7 +33,7 @@ int main() {
 		changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 		gets(optiuneSelectata, stdin);
 		fflush(stdin);
-		int succeeded=0;
+		int succeeded = 0;
 		while (!ValidOptiuneSelectata(optiuneSelectata)) {
 			PrettyPrint(hConsole, "Introduceti o optiune valida", RED);
 			changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
@@ -65,7 +65,7 @@ int main() {
 			int x = 1;
 		}
 		}
-		
+
 		PrettyPrint(hConsole, "Altceva?", APP_MESSAGE_COLOR);
 	} while (1);
 
@@ -84,6 +84,7 @@ void init() {
 	gandolhFleet.numeReprezentant = "gandolh";
 	gandolhFleet.nrAutovehicule = getAutovehiclesCount();
 	gandolhFleet.autos_head = NULL;
+	initDatabase();
 }
 
 char* trimString(char* str)
@@ -121,13 +122,16 @@ int ValidOptiuneSelectata(char* optiuneSelectata) {
 void createAutovehicle(Autovehicul* autov, HANDLE hConsole) {
 	autov->marca = malloc((MAX_SIZE_MARCA + 1) * sizeof(char));
 	autov->nrAuto = malloc(11 * sizeof(char));
-	char * tipAutov = malloc(11 * sizeof(char));;
+	char* tipAutov = malloc(11 * sizeof(char));;
+
 	PrettyPrint(hConsole, "Introduceti marca autovehicului:", APP_MESSAGE_COLOR);
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 	gets(autov->marca, sizeof(autov->marca), stdin);
+
 	PrettyPrint(hConsole, "Introduceti anul autovehiculului:", APP_MESSAGE_COLOR);
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 	scanf_s("%d", &autov->an);
+
 	PrettyPrint(hConsole, "Introduceti tipul autovehicului:", APP_MESSAGE_COLOR);
 	printf("tipurile disponibile sunt: ");
 	changeConsoleColor(hConsole, BLUE);
@@ -137,13 +141,16 @@ void createAutovehicle(Autovehicul* autov, HANDLE hConsole) {
 	gets(tipAutov, sizeof(tipAutov), stdin);
 	trimString(tipAutov);
 	while (!ValidTipAuto(tipAutov)) {
-	PrettyPrint(hConsole, "Introduceti un tip valid", RED);
-	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
-	gets(tipAutov, sizeof(tipAutov), stdin);
-	trimString(tipAutov);
+		PrettyPrint(hConsole, "Introduceti un tip valid", RED);
+		changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+		gets(tipAutov, sizeof(tipAutov), stdin);
+		trimString(tipAutov);
 	}
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 	autov->tipAuto = tipAutov;
+
+
+
 	PrettyPrint(hConsole, "Introduceti capacitatea cilindrica a motorului in litri", APP_MESSAGE_COLOR);
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 	scanf_s("%lf", &autov->capacitateMotor);
