@@ -7,6 +7,7 @@ const char* TipAuto[] = {
 };
 
 
+
 typedef struct Autovehicul {
 	int id;
 	char* marca,

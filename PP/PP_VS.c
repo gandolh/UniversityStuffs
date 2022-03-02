@@ -43,8 +43,11 @@ int main() {
 		case '1':
 			PrintAllAutovehicles();
 			break;
-		case '2':
+		case '2': {
+			changeConsoleColor(hConsole , APP_MESSAGE_COLOR);
+			printf("Alegeti un criteriu de cautare dintre %s", getSearchingFilters());
 			break;
+		}
 		case '3':
 		{
 			Autovehicul autov;

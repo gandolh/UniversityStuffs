@@ -42,3 +42,4 @@ char * GetTipuriAutovehicule( ) {
     return result;
 
 }
+
