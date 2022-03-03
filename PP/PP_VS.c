@@ -44,8 +44,30 @@ int main() {
 			PrintAllAutovehicles();
 			break;
 		case '2': {
+			char* Filters = getSearchingFilters();
+			char* chosenFilter = malloc(255,sizeof(char));
 			changeConsoleColor(hConsole , APP_MESSAGE_COLOR);
-			printf("Alegeti un criteriu de cautare dintre %s", getSearchingFilters());
+			printf("Alegeti un criteriu de cautare dintre:\n( %s )\n", Filters);
+			changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+			gets(chosenFilter,stdin);
+			trimString(chosenFilter);
+			trimString(Filters);
+			while (strstr(Filters,chosenFilter )==0) {
+				PrettyPrint(hConsole, "Introduceti un filtru valid", RED);
+				changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+				gets(chosenFilter, stdin);
+				trimString(chosenFilter);
+			}
+			PrettyPrint(hConsole, "Introduceti cuvantul cheie pentru cautare", APP_MESSAGE_COLOR);
+			char* keyword = malloc(255, sizeof(char));
+			changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+			gets(keyword, stdin);
+			trimString(keyword);
+			char* searchResult=NULL;
+			SearchInDatabase(chosenFilter, keyword,searchResult);
+			free(searchResult);
+			free(keyword);
+			free(chosenFilter);
 			break;
 		}
 		case '3':

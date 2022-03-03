@@ -69,27 +69,37 @@ char* getSearchingFilters() {
 	}
 
 	int k = 0;
-	char* temp_str;
+	char* temp_str=calloc( sizeof(CSVHeader) / sizeof(char),sizeof(char));
 	char* FilterTypes[FILTERS_COUNT];
-
-	for (int i = 0; strlen(CSVHeader); i++) {
-		if (CSVHeader[i] == ';') {
-
-		temp_str[strlen(temp_str)] = '\0';
-		strcpy_s(FilterTypes[k++], temp_str);
+	int index_temp_str = -1;
+	for (int i = 0; CSVHeader[i]!=NULL; i++) {
+		if (CSVHeader[i] == ';' || CSVHeader[i] == '\n') {
+		temp_str[++index_temp_str] = '\0';
+		FilterTypes[k] = malloc((strlen(temp_str))* sizeof(char));
+		FilterTypes[k][strlen(FilterTypes[k])-1] = '\0';
+		strcpy_s(FilterTypes[k],strlen(temp_str)+1, temp_str);
 		temp_str[0] = '\0';
+		index_temp_str = -1;
+		k++;
 		}
 		else {
-			temp_str[strlen(temp_str)] = CSVHeader[i];
+			//strcat_s(temp_str, 1, CSVHeader[i]);
+			//strcpy_s(temp_str+ strlen(temp_str),1, CSVHeader[i]);
+			temp_str[++index_temp_str] = CSVHeader[i];
 		}
 	}
-	for (int i = 0; FilterTypes[i] != NULL; i++)
+	for (int i = 0; i<k; i++)
 		if (result != NULL) {
-			strcpy_s(result + strlen(result), 3, FilterTypes[i]);
-			if (FilterTypes[i + 1] != NULL)
+			strcpy_s(result + strlen(result), strlen(FilterTypes[i]) +1, FilterTypes[i]);
+			if (i<k-1)
 				strcpy_s(result + strlen(result), 3, ",");
 		}
 	return result;
+
+}
+
+void SearchInDatabase(char *chosenFilter, char* keyword,char *result) {
+	//fa cautarile in csv_s
 
 }
 
