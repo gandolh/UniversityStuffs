@@ -23,17 +23,21 @@
     <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\Printings.h">
+    <ClInclude Include="Sources\Printings.c">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\DatabaseOperations.c">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Gandolhs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\Structures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\DatabaseOperations.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Database\autovehicles.csv" />
+    <None Include="Database\backup.csv" />
   </ItemGroup>
 </Project>

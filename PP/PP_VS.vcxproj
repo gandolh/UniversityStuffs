@@ -25,12 +25,14 @@
     <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\DatabaseOperations.h" />
-    <ClInclude Include="Headers\Printings.h" />
+    <ClInclude Include="Headers\Gandolhs.h" />
     <ClInclude Include="Headers\Structures.h" />
+    <ClInclude Include="Sources\DatabaseOperations.c" />
+    <ClInclude Include="Sources\Printings.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Database\autovehicles.csv" />
+    <None Include="Database\backup.csv" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

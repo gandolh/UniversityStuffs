@@ -1,19 +1,11 @@
 #include <stdio.h>
 #include <windows.h>
 #include "Headers/Structures.h"
-#include "Headers/Printings.h"
-#include "Headers/DatabaseOperations.h"
-#define APP_MESSAGE_COLOR CYAN
-#define USER_MESSAGE_COLOR YELLOW
+#include "Headers/Gandolhs.h"
+#include "Sources/Printings.c"
+#include "Sources/DatabaseOperations.c"
+
 Flota gandolhFleet;
-
-
-
-void init();
-void createAutovehicle(Autovehicul* autov);
-int ValidTipAuto(char* tip);
-char* trimString(char* str);
-int ValidOptiuneSelectata(char* optiuneSelectata);
 
 int main() {
 	init();
@@ -27,8 +19,8 @@ int main() {
 		PrettyPrint(hConsole, "\t1. Vizualizeaza toate autoturismele", APP_MESSAGE_COLOR);
 		PrettyPrint(hConsole, "\t2. Cauta un autoturism", APP_MESSAGE_COLOR);
 		PrettyPrint(hConsole, "\t3. Adauga autoturism", APP_MESSAGE_COLOR);
-		PrettyPrint(hConsole, "\t4. Actualizeaza autoturism", APP_MESSAGE_COLOR);
-		PrettyPrint(hConsole, "\t5. Sterge Autoturism", APP_MESSAGE_COLOR);
+		PrettyPrint(hConsole, "\t4. Actualizeaza autoturism (Mai intai cautati id-ul)", APP_MESSAGE_COLOR);
+		PrettyPrint(hConsole, "\t5. Sterge Autoturism (Mai intai cautati id-ul)", APP_MESSAGE_COLOR);
 		changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 		gets(optiuneSelectata, stdin);
 		fflush(stdin);
@@ -41,18 +33,19 @@ int main() {
 		}
 		switch (optiuneSelectata[0]) {
 		case '1':
-			PrintAllAutovehicles();
+			PrintAllAutovehicles(hConsole);
 			break;
 		case '2': {
 			char* Filters = getSearchingFilters();
-			char* chosenFilter = malloc(255,sizeof(char));
-			changeConsoleColor(hConsole , APP_MESSAGE_COLOR);
+			char* chosenFilter = malloc(255, sizeof(char));
+			changeConsoleColor(hConsole, APP_MESSAGE_COLOR);
 			printf("Alegeti un criteriu de cautare dintre:\n( %s )\n", Filters);
 			changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
-			gets(chosenFilter,stdin);
+			gets(chosenFilter, stdin);
 			trimString(chosenFilter);
 			trimString(Filters);
-			while (strstr(Filters,chosenFilter )==0) {
+
+			while (strstr(Filters, chosenFilter) == 0) {
 				PrettyPrint(hConsole, "Introduceti un filtru valid", RED);
 				changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 				gets(chosenFilter, stdin);
@@ -63,8 +56,10 @@ int main() {
 			changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 			gets(keyword, stdin);
 			trimString(keyword);
-			char* searchResult=NULL;
-			SearchInDatabase(chosenFilter, keyword,searchResult);
+			char* searchResult = malloc(MAX_LEN* sizeof(char));
+			changeConsoleColor(hConsole,GREEN);
+			SearchInDatabase(chosenFilter, keyword, searchResult);
+			printf(searchResult);
 			free(searchResult);
 			free(keyword);
 			free(chosenFilter);
@@ -81,9 +76,23 @@ int main() {
 			//free(&autov);
 			break;
 		}
-		case '4':
+		case '4': {
+			char* editingId = calloc(MAX_LEN, sizeof(char));
+			PrettyPrint(hConsole, "Id-ul autovehiculului de modificat:", USER_MESSAGE_COLOR);
+			gets(editingId, stdin);
+			//EditRow();
+			//ca la delete doar ca in loc de delete row ai edit row.
+			//eventual str replace pe splituri.
+			//custrtok?
+		}
 			break;
-		case '5':
+		case '5': {
+			char* deletingId = calloc(MAX_LEN,sizeof(char));
+			PrettyPrint(hConsole, "Id-ul autovehiculului de sters:", USER_MESSAGE_COLOR);
+			gets(deletingId,stdin);
+			deleteRow(deletingId);
+
+		}
 			break;
 		default: {
 			int x = 1;

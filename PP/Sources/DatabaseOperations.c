@@ -1,6 +1,4 @@
-#define DATABASE_PATH "Database/autovehicles.csv"
-#define MAX_LEN 256
-#define FILTERS_COUNT 10
+
 
 int AddToDatabase(Autovehicul autov) {
 	FILE* fptr;
@@ -14,19 +12,20 @@ int AddToDatabase(Autovehicul autov) {
 	return 1;
 }
 
-void PrintAllAutovehicles() {
+void PrintAllAutovehicles(HANDLE hConsole) {
 	FILE* fptr;
 	char buffer[MAX_LEN];
 	fopen_s(&fptr, DATABASE_PATH, "a+");
 	if (fptr) {
 		fseek(fptr, 0, SEEK_SET);
-		//ignoram prima linie pentru ca e header-ul
-		fgets(buffer, MAX_LEN, fptr);
+		////ignoram prima linie pentru ca e header-ul
+		//fgets(buffer, MAX_LEN, fptr);
 
 		while(fgets(buffer, MAX_LEN, fptr))
 		{
 			// Remove trailing newline
 			buffer[strcspn(buffer, "\n")] = 0;
+			changeConsoleColor(hConsole,GREEN);
 			printf("%s\n", buffer);
 		}
 
@@ -98,10 +97,74 @@ char* getSearchingFilters() {
 
 }
 
-void SearchInDatabase(char *chosenFilter, char* keyword,char *result) {
-	//fa cautarile in csv_s
-
+int CharacterCount(char* str, char c) {
+	int i = 0,count=0;
+	for (i = 0; str[i]; i++)
+		if (str[i] == c)count++;
+	return count;
 }
+
+void SearchInDatabase(char *chosenFilter, char* keyword,char *result) {
+	FILE* fptr;
+	char buffer[MAX_LEN];
+	int lineCount = 0;
+	fopen_s(&fptr, DATABASE_PATH, "r");
+	if (fptr) {
+		fseek(fptr, 0, SEEK_SET);
+		char* CSV_header = malloc(MAX_LEN);
+		fgets(CSV_header, MAX_LEN, fptr);
+		printf(CSV_header);
+		CSV_header[strstr(CSV_header, chosenFilter) - CSV_header + strlen(chosenFilter)] = '\0';
+		int position_filter = CharacterCount(CSV_header,';');
+		while (fgets(buffer, MAX_LEN, fptr))
+		{
+			char* found = strstr(buffer, keyword);
+			if (found != 0) {
+				char* foo_string = malloc(MAX_LEN * sizeof(char));
+				strcpy(foo_string, buffer );
+				foo_string[found - buffer + strlen(keyword)] = '\0';
+				int position_result = CharacterCount(foo_string, ';');
+				if (position_result == position_filter)strcpy(result,buffer);
+			free(foo_string);
+			}
+		}
+		free(CSV_header);
+		fclose(fptr);
+	}
+	return lineCount;
+}
+
+
+void deleteRow(char* deletingId) {
+	FILE* fptr;
+	char** content = calloc(1024,sizeof(char));
+	char buffer[MAX_LEN];
+	char id[MAX_LEN];
+	int k = 0,i,j;
+	fopen_s(&fptr, DATABASE_PATH, "r");
+	if (fptr) {
+		while (fgets(buffer, MAX_LEN, fptr)) {
+			strcpy(id, buffer);
+			id[strstr(id, ";") - id] = '\0';
+			if (strstr(id, deletingId) == 0) {
+				content[k] = malloc(MAX_LEN * sizeof(char));
+				strcpy(content[k], buffer);
+				k++;
+			}
+		}
+		fclose(fptr);
+	}
+	fopen_s(&fptr, DATABASE_PATH, "w");
+	if (fptr) {
+	for (i = 0; content[i]; i++) {
+		content[i][strlen(content[i])] = '\0';
+		fprintf(fptr, content[i]);
+	}
+	fclose(fptr);
+	}
+	free(content);
+}
+
 
 
 void initDatabase() {
