@@ -78,8 +78,14 @@ int main() {
 		}
 		case '4': {
 			char* editingId = calloc(MAX_LEN, sizeof(char));
-			PrettyPrint(hConsole, "Id-ul autovehiculului de modificat:", USER_MESSAGE_COLOR);
+			Autovehicul editedAutovhechicle;
+
+			PrettyPrint(hConsole, "Id-ul autovehiculului de modificat:",APP_MESSAGE_COLOR);
+			changeConsoleColor(hConsole,USER_MESSAGE_COLOR);
 			gets(editingId, stdin);
+			PrettyPrint(hConsole,"Daca nu doriti sa modificati lasa-ti campul gol", APP_MESSAGE_COLOR);
+			createAutovehicle(&editedAutovhechicle, hConsole);
+			//EditRow();
 			//EditRow();
 			//ca la delete doar ca in loc de delete row ai edit row.
 			//eventual str replace pe splituri.
