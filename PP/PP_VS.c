@@ -250,6 +250,7 @@ int EditAutovehicle(Autovehicul* autov, HANDLE hConsole) {
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 	char* capacitateMotor_str = malloc(MAX_LEN * sizeof(char));
 	gets(capacitateMotor_str, stdin);
+	autov->capacitateMotor = atof(capacitateMotor_str);
 	PrettyPrint(hConsole, "Introduceti numarul de locuri", APP_MESSAGE_COLOR);
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 	char* numarlocuri_str = malloc(MAX_LEN * sizeof(char));
