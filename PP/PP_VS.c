@@ -84,7 +84,8 @@ int main() {
 			changeConsoleColor(hConsole,USER_MESSAGE_COLOR);
 			gets(editingId, stdin);
 			PrettyPrint(hConsole,"Daca nu doriti sa modificati lasa-ti campul gol", APP_MESSAGE_COLOR);
-			createAutovehicle(&editedAutovhechicle, hConsole);
+			EditAutovehicle(&editedAutovhechicle, hConsole);
+
 			//EditRow();
 			//EditRow();
 			//ca la delete doar ca in loc de delete row ai edit row.
@@ -199,6 +200,62 @@ void createAutovehicle(Autovehicul* autov, HANDLE hConsole) {
 	PrettyPrint(hConsole, "Introduceti numarul matricol (faraspatii):", APP_MESSAGE_COLOR);
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 	gets(autov->nrAuto, sizeof(autov->nrAuto), stdin);
+	gets(autov->nrAuto, sizeof(autov->nrAuto), stdin);
+
+	autov->next = NULL;
+}
+
+
+int convert_str_to_decimal(char* str) {
+	return atoi(str);
+}
+
+int EditAutovehicle(Autovehicul* autov, HANDLE hConsole) {
+	autov->marca = malloc((MAX_SIZE_MARCA + 1) * sizeof(char));
+	autov->nrAuto = malloc(MAX_LEN * sizeof(char));
+	char* tipAutov = malloc(MAX_LEN * sizeof(char));;
+
+	autov->id = getAutovehiclesCount();
+
+
+	PrettyPrint(hConsole, "Introduceti marca autovehicului:", APP_MESSAGE_COLOR);
+	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+	gets(autov->marca, sizeof(autov->marca), stdin);
+
+	PrettyPrint(hConsole, "Introduceti anul autovehiculului:", APP_MESSAGE_COLOR);
+	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+	char* an_str = malloc(MAX_LEN * sizeof(char));
+	gets(an_str,stdin);
+	autov->an = convert_str_to_decimal(an_str);
+	//printf(autov->an);
+	PrettyPrint(hConsole, "Introduceti tipul autovehicului:", APP_MESSAGE_COLOR);
+	printf("tipurile disponibile sunt: ");
+	changeConsoleColor(hConsole, BLUE);
+	printf("%s\n", GetTipuriAutovehicule());
+	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+	gets(tipAutov, sizeof(tipAutov), stdin);
+	trimString(tipAutov);
+	while (!ValidTipAuto(tipAutov) || TipAuto=="") {
+		PrettyPrint(hConsole, "Introduceti un tip valid", RED);
+		changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+		gets(tipAutov, sizeof(tipAutov), stdin);
+		trimString(tipAutov);
+	}
+	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+	autov->tipAuto = tipAutov;
+
+
+
+	PrettyPrint(hConsole, "Introduceti capacitatea cilindrica a motorului in litri", APP_MESSAGE_COLOR);
+	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+	char* capacitateMotor_str = malloc(MAX_LEN * sizeof(char));
+	gets(capacitateMotor_str, stdin);
+	PrettyPrint(hConsole, "Introduceti numarul de locuri", APP_MESSAGE_COLOR);
+	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+	char* numarlocuri_str = malloc(MAX_LEN * sizeof(char));
+	gets(numarlocuri_str, stdin);
+	PrettyPrint(hConsole, "Introduceti numarul matricol (faraspatii):", APP_MESSAGE_COLOR);
+	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 	gets(autov->nrAuto, sizeof(autov->nrAuto), stdin);
 
 	autov->next = NULL;
