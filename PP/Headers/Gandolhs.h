@@ -1,4 +1,3 @@
-#pragma warning(disable:4996)
 #define APP_MESSAGE_COLOR CYAN
 #define USER_MESSAGE_COLOR YELLOW
 #define DATABASE_PATH "Database/autovehicles.csv"
