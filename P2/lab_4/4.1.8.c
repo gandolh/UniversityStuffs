@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#pragma warning(disable:4996)
 void fct(int *tab, int n, double *sum, double *med, double *avg)
 {
     int i;

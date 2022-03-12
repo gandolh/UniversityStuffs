@@ -1,4 +1,5 @@
 #include<stdio.h>
+
 void interschimba(int* a,int* b){
     int t = *a;
     *a = *b; 
