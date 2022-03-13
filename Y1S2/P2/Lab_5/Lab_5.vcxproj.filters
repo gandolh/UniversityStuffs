@@ -15,10 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="5.1.5.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="5.1.6.c">
+    <ClCompile Include="5.4.2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
