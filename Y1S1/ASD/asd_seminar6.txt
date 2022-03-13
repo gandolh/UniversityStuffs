@@ -1,0 +1,2 @@
+5.x= nlog3n
+6.x= nlogn

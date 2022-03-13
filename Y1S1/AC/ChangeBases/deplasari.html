@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reprezentari</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <link href="css/calcule.css" rel="stylesheet">
+    <link rel="icon" href="fox.png" type="image/gif" sizes="24x24"> 
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 56px;">
+      <a class="navbar-brand" href="#">FoxPower!</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link " href="index.html">Schimbare baza </a>
+          <a class="nav-item nav-link" href="calcule.html">Calcule</a>
+          <a class="nav-item nav-link " href="reprezentari.html">Reprezentari</a>
+          <a class="nav-item nav-link active" href="deplasari.html">Deplasari</a>
+          <a class="nav-item nav-link " href="calcule_virgulafixa.html">Calcule virgula fixa</a>
+          
+        </div>
+      </div>
+    </nav>
+    <div id="BodyContainer">
+    <div class="card gradient-border" id="mainOne"  > 
+        <div class="card-body innerMainone" >
+            <div class="form-group mt-2 calculeInput">
+                <label for="Numar_input">Numar</label>
+                <input type="text" class="form-control" id="Numar_input" placeholder="" >
+              </div>
+              
+              <div class="form-group mt-2 calculeInput">
+                <label for="nr_bits_input">Numar de biti de marime</label>
+                <input type="text" class="form-control" id="nr_bits_input" placeholder="" >
+              </div>
+              <div class="form-group mt-2 calculeInput">
+                <label for="sens_deplasare_input">sens de deplasare <br/>(putere a lui 2)</label>
+                <input type="number" class="form-control" id="sens_deplasare_input" placeholder="" >
+              </div>
+              <div class="form-group mt-2 calculeInput">
+                <label for="reprezentare_select">Reprezentare in</label>
+                <select class="form-select" id="reprezentare_select" >
+                    <option selected value="MS">MS</option>
+                    <option value="C1">C1</option>
+                    <option value="C2">C2</option>
+                  </select>
+              </div>
+
+              <button type="button" class="btn btn-success mt-3" style="border:0;background-color: #146c43;" id="Calculeaza">Deplaseaza</button>
+
+              <span id="result" class="mt-3" 
+              style="visibility:hidden;color: #fc5c9c;"
+              > Result</span>
+        </div>
+      </div>
+    </div>
+
+      <script src="js/jquery-3.6.0.min.js"></script>
+      <script src="js/ValidCheck.js"></script>
+      <script src="js/deplasari.js"></script>
+    <script src="js/ChangeBaseFunctions.js"></script>
+
+
+</body>
+</html>

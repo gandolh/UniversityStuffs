@@ -1,0 +1,72 @@
+.calculeInput{
+    width:50%;
+}
+#BodyContainer {
+    background: #2a2d2f;
+    color: #d4d0cb;
+    font-family: Muli, sans-serif;
+    height: calc(100vh - 56px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+  }
+  *,body {
+    margin: 0;
+    padding: 0;
+  }
+
+  
+#mainOne {
+    border-radius: 33px;
+    width:500px;
+    height:500px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+  .innerMainone{
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #2a2d2f;
+      border-radius: var(--borderWidth);
+  }
+  
+  .gradient-border {
+    --borderWidth: 3px;
+    background: #1D1F20;
+    position: relative;
+    border-radius: var(--borderWidth);
+  }
+  .gradient-border:after {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--borderWidth));
+    left: calc(-1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2);
+    width: calc(100% + var(--borderWidth) * 2);
+    background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+    border-radius: calc(2 * var(--borderWidth));
+    z-index: -1;
+    animation: animatedgradient 6s ease alternate infinite;
+    background-size: 300% 300%;
+  }
+  
+  
+  @keyframes animatedgradient {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+      }
+  }
+  
+  
+  

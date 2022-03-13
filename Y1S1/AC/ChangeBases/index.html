@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schimbare baze</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="icon" href="fox.png" type="image/gif" sizes="24x24"> 
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 56px;">
+      <a class="navbar-brand" href="#">FoxPower!</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="index.html">Schimbare baza </a>
+          <a class="nav-item nav-link" href="calcule.html">Calcule</a>
+          <a class="nav-item nav-link" href="reprezentari.html">Reprezentari</a>
+          <a class="nav-item nav-link" href="deplasari.html">Deplasari</a>
+          <a class="nav-item nav-link " href="calcule_virgulafixa.html">Calcule virgula fixa</a>
+
+        </div>
+      </div>
+    </nav>
+    <div id="BodyContainer">
+    <div class="card" id="mainOne">
+        <div class="card-body innerMainone" >
+            <div class="form-group mt-2">
+                <label for="nrTransform">numarul de transformat</label>
+                <input type="text" class="form-control" id="nrTransform_input" placeholder="" >
+              </div>
+            <div class="form-group mt-2">
+                <label for="fromBase">de la baza:</label>
+                <input type="number" class="form-control" id="fromBase_input" placeholder="" value="10" >
+              </div>
+              <div class="form-group mt-2">
+                <label for="toBase">in baza:</label>
+                <input type="number" class="form-control" id="toBase_input" placeholder="">
+              </div>
+     
+              <button type="button" class="btn btn-success mt-3" style="border:0;background-color: #146c43;" id="Calculeaza">Calculeaza</button>
+
+              <span id="result" class="mt-3 text-primary" 
+              style="visibility:hidden"
+              > Result</span>
+        </div>
+      </div>
+    </div>
+
+      <script src="js/jquery-3.6.0.min.js"></script>
+      <script src="js/ValidCheck.js"></script>
+      <script src="js/ChangeBaseFunctions.js"></script>
+      <script src="js/script.js"></script>
+
+
+
+</body>
+</html>

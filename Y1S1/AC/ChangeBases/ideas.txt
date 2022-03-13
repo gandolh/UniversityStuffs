@@ -1,0 +1,2 @@
+Math.round(1/0.33333333333333337 * 100) / 100
+rotunjire pe ultimele 2zecimale

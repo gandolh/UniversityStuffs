@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validator expresie</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="icon" href="fox.png" type="image/gif" sizes="24x24" />
+  </head>
+  <body>
+    <div class="card" id="mainCard">
+      <div class="card-body" id="mainCardBody">
+        <div id="inputExpresie_Parent_div">
+          <div id="textExpresie">
+            <p>Input expresie:</p>
+            <div
+              style="justify-content: space-around; display: flex; width: 100%"
+            >
+              <span class="symbols">¬</span>
+              <span class="symbols">∧</span
+              ><span class="symbols">⇔</span>
+              <span class="symbols">∨</span>
+              <span class="symbols">⇒</span>
+              <span class="symbols">(</span>
+              <span class="symbols">)</span>
+            </div>
+            <small style="font-size: 0.7em;color: FF865E;font-weight: 550;">Dati click pe simbolul pe care vreti sa il inserati
+            in casuta de input. </small>
+          </div>
+          <textarea id="expresieInput" placeholder="Exemplu: (P ⇒ Q)"></textarea>
+        </div>
+        <div>
+          <span id="response_message" style="visibility: hidden"> ----- </span>
+          <button type="button" class="btn btn-primary" id="Verifica">
+            Verifica
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
