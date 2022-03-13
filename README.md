@@ -1,2 +1,2 @@
-# UniversityStuffs_Y1S2
+# UniversityStuffs
 mainly for university homeworks and projects
