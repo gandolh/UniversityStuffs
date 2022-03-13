@@ -8,28 +8,22 @@ typedef struct persoana {
 }Persoana;
 
 
+Persoana* citire() {
+	Persoana* p = malloc(sizeof(Persoana));
+	p->nume = malloc(100 * sizeof(char));
+	p->prenume = malloc(100 * sizeof(char));
 
-Persoana** citire(int n) {
-	int i = 0;
-	Persoana** p = malloc(n * sizeof(Persoana));
-	Persoana* current = *p;
-	for (i = 0; i < n; i++) {
-		current->nume = malloc(100 * sizeof(char));
-		current->prenume = malloc(100 * sizeof(char));
-		scanf("%s %s %d", (current->nume), (current->prenume), &(current->varsta));
-		current++;
-	}
+	scanf("%s %s %d", (p->nume), (p->prenume), &(p->varsta));
 	return p;
 }
-void afisare(struct persoana** p) {
-	printf("%s %s %d", (*p)->prenume, (*p)->nume, (*p)->varsta);
+void afisare(struct persoana* p) {
+	printf("%s %s %d", p->prenume, p->nume, p->varsta);
+
 }
 
 
 int main() {
-	int n;
-	scanf("%d", &n);
-	Persoana** p = citire(n);
+	Persoana* p = citire();
 	afisare(p);
 
 }
