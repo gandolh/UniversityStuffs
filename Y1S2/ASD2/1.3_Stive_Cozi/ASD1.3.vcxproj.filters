@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="1.3.4.c">
+    <ClCompile Include="1.3.5.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
