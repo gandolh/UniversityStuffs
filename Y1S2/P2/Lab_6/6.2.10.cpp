@@ -28,7 +28,8 @@ void modificareData(char * str) {
 
 	printf("%s-%d-%s", month, dayInteger  + 5, year);
 }
-
+//mi lene
+// 
 //char* modificareData(char * str,int day, int year) {
 //
 //}
