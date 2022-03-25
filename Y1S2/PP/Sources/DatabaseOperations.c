@@ -26,6 +26,7 @@ void PrintAllAutovehicles(HANDLE hConsole) {
 			// Remove trailing newline
 			buffer[strcspn(buffer, "\n")] = 0;
 			changeConsoleColor(hConsole,GREEN);
+			for (int i = 0; buffer[i]; i++)if (buffer[i] == ';')buffer[i] = ' ';
 			printf("%s\n", buffer);
 		}
 
@@ -113,7 +114,10 @@ void SearchInDatabase(char *chosenFilter, char* keyword,char *result) {
 		fseek(fptr, 0, SEEK_SET);
 		char* CSV_header = malloc(MAX_LEN);
 		fgets(CSV_header, MAX_LEN, fptr);
-		printf(CSV_header);
+		char* beautifull_formated_csv_header = malloc(sizeof(char) * 255);
+		strcpy(beautifull_formated_csv_header,CSV_header);
+		for (int i = 0; beautifull_formated_csv_header[i]; i++)if(beautifull_formated_csv_header[i]==';')beautifull_formated_csv_header[i] = ' ';
+		printf(beautifull_formated_csv_header);
 		CSV_header[strstr(CSV_header, chosenFilter) - CSV_header + strlen(chosenFilter)] = '\0';
 		int position_filter = CharacterCount(CSV_header,';');
 		while (fgets(buffer, MAX_LEN, fptr))
@@ -165,7 +169,34 @@ void deleteRow(char* deletingId) {
 	free(content);
 }
 
+void replaceAutov(Autovehicul autov) {
+	FILE* fptr;
+	char buffer[MAX_LEN];
+	fopen_s(&fptr, DATABASE_PATH, "r");
+	char databaseCSV[MAX_LEN][MAX_LEN];
+	int i = -1, updatingRowIndex=-1;
+	if (fptr) {
+		fseek(fptr, 0, SEEK_SET);
+		while (fgets(buffer, MAX_LEN, fptr))
+		{
+			strcpy(databaseCSV[++i], buffer);
+			if (buffer[0] == autov.id + '0')
+				updatingRowIndex = i;
+		}
+		int rows = i;
+		fclose(fptr);
+		fopen_s(&fptr, DATABASE_PATH, "w+");
+		fseek(fptr, 0, SEEK_SET);
+		for (i = 0; i <= rows; i++) {
+			if(updatingRowIndex!= i)
+			fprintf(fptr, databaseCSV[i]);
+			else 
+			fprintf(fptr, "%d;%s;%s;%d;%.2lf;%d;%s\n", autov.id, autov.marca, autov.tipAuto, autov.an, autov.capacitateMotor, autov.numarLocuri, autov.nrAuto);
+		}
+		fclose(fptr);
+	}
 
+}
 
 void initDatabase() {
 	FILE* fptr;

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
+#pragma warning(disable:4996)
 #include "Headers/Structures.h"
 #include "Headers/Gandolhs.h"
 #include "Sources/Printings.c"
@@ -62,6 +63,7 @@ int main() {
 			char* searchResult = malloc(MAX_LEN* sizeof(char));
 			changeConsoleColor(hConsole,GREEN);
 			SearchInDatabase(chosenFilter, keyword, searchResult);
+			for (int i = 0; searchResult[i]; i++)if (searchResult[i] == ';')searchResult[i] = ' ';
 			printf(searchResult);
 			free(searchResult);
 			free(keyword);
@@ -80,13 +82,7 @@ int main() {
 			break;
 		}
 		case '4': {
-			char* editingId = calloc(MAX_LEN, sizeof(char));
 			Autovehicul editedAutovhechicle;
-
-			PrettyPrint(hConsole, "Id-ul autovehiculului de modificat:",APP_MESSAGE_COLOR);
-			changeConsoleColor(hConsole,USER_MESSAGE_COLOR);
-			gets(editingId, stdin);
-			PrettyPrint(hConsole,"Daca nu doriti sa modificati lasa-ti campul gol", APP_MESSAGE_COLOR);
 			EditAutovehicle(&editedAutovhechicle, hConsole);
 
 			//EditRow();
@@ -110,6 +106,8 @@ int main() {
 		}
 
 		PrettyPrint(hConsole, "Altceva?", APP_MESSAGE_COLOR);
+		//system("cls");
+
 	} while (1);
 
 
@@ -217,12 +215,14 @@ int EditAutovehicle(Autovehicul* autov, HANDLE hConsole) {
 	autov->marca = malloc((MAX_SIZE_MARCA + 1) * sizeof(char));
 	autov->nrAuto = malloc(MAX_LEN * sizeof(char));
 	char* tipAutov = malloc(MAX_LEN * sizeof(char));;
-
-	autov->id = getAutovehiclesCount();
+	PrettyPrint(hConsole, "Id-ul autovehiculului de modificat:", APP_MESSAGE_COLOR);
+	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+	scanf("%d", &autov->id);
 
 
 	PrettyPrint(hConsole, "Introduceti marca autovehicului:", APP_MESSAGE_COLOR);
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
+	gets(autov->marca, sizeof(autov->marca), stdin);
 	gets(autov->marca, sizeof(autov->marca), stdin);
 
 	PrettyPrint(hConsole, "Introduceti anul autovehiculului:", APP_MESSAGE_COLOR);
@@ -258,9 +258,10 @@ int EditAutovehicle(Autovehicul* autov, HANDLE hConsole) {
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 	char* numarlocuri_str = malloc(MAX_LEN * sizeof(char));
 	gets(numarlocuri_str, stdin);
+	autov->numarLocuri = numarlocuri_str[0] - '0';
 	PrettyPrint(hConsole, "Introduceti numarul matricol (faraspatii):", APP_MESSAGE_COLOR);
 	changeConsoleColor(hConsole, USER_MESSAGE_COLOR);
 	gets(autov->nrAuto, sizeof(autov->nrAuto), stdin);
-
+	replaceAutov(*autov);
 	autov->next = NULL;
 }
