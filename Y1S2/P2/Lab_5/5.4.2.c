@@ -1,64 +1,117 @@
-#include <stdio.h>
-#include <stdlib.h>
-#pragma warning(disable:4996)
-#define MAX 256
-typedef struct {
-	char nume[20];
-	float precipitatii;
-	char zona;
-	char regiune[10];
-}Oras;
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
 
-char* getRegiune(char zona) {
-	char regiune[10];
-	if (zona == 'N')strcpy(regiune, "Nord");
-	if (zona == 'S')strcpy(regiune, "Sud");
-	if (zona == 'E')strcpy(regiune, "Est");
-	if (zona == 'V')strcpy(regiune, "Vest");
-	return regiune;
+typedef struct City City;
+struct City {
+    char name[20];
+    float precipitatii;
+    char zone;
+};
+
+City CitireOras() {
+    char input[200];
+    fgets(input,200,stdin);
+    char* token = strtok(input," ");
+    //City* oras = malloc(sizeof(City));
+    City oras;
+    int i=0;
+    while (token != NULL) {
+        switch (i) {
+            case 0:
+                strcpy(oras.name,token);
+                break;
+            case 1:
+                oras.precipitatii = atof(token);
+                break;
+            case 2:
+                oras.zone = token[0];
+                break;
+            default:
+                printf("Erroare la citire\n");
+                break;
+        }
+        i++;
+        token = strtok(NULL," ");
+    }
+    return oras;
 }
 
-Oras Citire_Oras() {
-	Oras oras;
-	scanf("%s %f %s", &oras.nume, &oras.precipitatii, &oras.zona);
-	strcpy(oras.regiune, getRegiune(oras.zona));
-	return oras;
+char* _(char c) {
+    switch (c) {
+        case 'E':
+            return "Est";
+        case 'V':
+            return "Vest";
+        case 'N':
+            return "Nord";
+        case 'S':
+            return "Sud";
+    }
+    return "";
 }
 
+void AfisareOras(City oras) {
+    printf("%s precipitatii=%.2f l %s",oras.name,oras.precipitatii,_(oras.zone));
+    printf("\n");
+}
 
+char consoane[] = "bcdfghjklmnpqrstvwxyz";
+int CountConsoane(char str[]) {
+    char tmp;
+    int c = 0;
+    for (int i=0; i < strlen(str); i++) {
+        if (str[i]>'A' && str[i]<'Z') {
+            tmp = str[i]+32;
+        } else tmp = str[i];
 
+        if (strchr(consoane,tmp)!=0) {
+            c++;
+        }
+    }
+    return c;
+}
 
 int main() {
-	int n, i, j, nr_cons;
-	char zona;
-	Oras oras[MAX];
-	scanf("%d", &n);
-	for (i = 0; i < n; i++)
-		oras[i] = Citire_Oras();
-	scanf("%d %c", &nr_cons, &zona);
+    int n;
+    scanf("%d",&n);
+    char ch;
+    while ((ch = getchar()) != '\n' && ch != EOF);
+    City orase[n];
+    for (int i=0; i<n; i++) {
+        orase[i] = CitireOras();
+    }
 
-	for (i = 0; i < n; i++) {
-		int act_nr_cons = 0;
-		for (j = 0; oras[i].nume[j]; j++) {
-			if (!strchr("aeiouAEIOU", oras[i].nume[j]))
-				act_nr_cons++;
-		}
-		if (act_nr_cons >= nr_cons) {
-			printf("%s precipitatii=%.2f l %s\n", oras[i].nume, oras[i].precipitatii, oras[i].regiune);
-		}
-	}
+    int nrConsoane;
+    scanf("%d\n",&nrConsoane);
+    for (int i=0; i<n; i++) {
+        if (CountConsoane(orase[i].name)>=nrConsoane) {
+            AfisareOras(orase[i]);
+        }
+    }
+    scanf("%c",&ch);
+    printf("In %s\n", _(ch));
 
-	char regiune[10];
-	char stele[MAX];
-	strcpy(regiune, getRegiune(zona));
-	printf("In %s\n", regiune);
-	for (i = 0; i < n; i++) {
-		if (zona == oras[i].zona) {
-			strcpy(stele, "");
-			for (j = 0; j < (int)(oras[i].precipitatii); j++)
-				strcat(stele, "*");
-			printf("%-9s: %s\n", oras[i].nume, stele);
-		}
-	}
+    //Get max oras name len from that zone
+    int maxLen = -1;
+    for (int i=0; i<n; i++) {
+        if (orase[i].zone==ch) {
+            int _ = strlen(orase[i].name);
+            if (_>maxLen) maxLen = _;
+        }
+    }
+    
+    for (int i=0; i<n; i++) {
+        if (orase[i].zone!=ch)
+            continue;
+        int len = strlen(orase[i].name);
+        printf("%s",orase[i].name);
+        for (int j=0; j<maxLen-len; j++)
+            printf(" ");
+        printf(": ");
 
+        for (int j=0; j<(int)orase[i].precipitatii; j++)
+            printf("*");
+        printf("\n");
+    }
 }
