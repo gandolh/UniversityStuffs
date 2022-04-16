@@ -1,0 +1,66 @@
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+
+using namespace std;
+class Emisiune {
+    char* nume;
+    int durata;
+public:
+    void modificareLitera( char c, int);
+    void afisare();
+     Emisiune();
+     Emisiune(int durata, char* nume);
+     Emisiune(const Emisiune&);
+     ~Emisiune();
+};
+
+void Emisiune::afisare() {
+    printf("Emisiune: %s; Durata: %d\n",this->nume,this->durata);
+}
+
+void Emisiune::modificareLitera( char c, int index) {
+    this->nume[index] = c;
+}
+
+Emisiune::Emisiune(int durata, char* nume) :durata(durata) {
+    this->nume = new char[256];
+    strcpy(this->nume , nume);
+    
+}
+
+Emisiune::Emisiune(const Emisiune& e1) {
+    this->nume = new char[256];
+    strcpy(this->nume , e1.nume);
+    this->durata = e1.durata;
+}
+Emisiune::~Emisiune() {
+    delete[] nume;
+}
+Emisiune* citire() {
+    int durata;
+    char* nume = new char[256];
+    cin.getline(nume, 256);
+    cin >> durata;
+    Emisiune* e = new Emisiune(durata, nume);
+    //delete[] nume;
+
+    return e;
+}
+void fct(Emisiune a) {
+    a.modificareLitera('X', 0);
+    cout << "fct: "; a.afisare();
+}
+int main() {
+    Emisiune* e = citire();
+    cout << "e: "; e->afisare();
+    cin.ignore();
+    Emisiune* f = citire();
+    cout << "f: "; f->afisare();
+    Emisiune b = *e;
+    b.modificareLitera('A', 1);
+    cout << "b: "; b.afisare();
+    cout << "e: "; e->afisare();
+    fct(*f);
+    cout << "f: "; f->afisare();
+}

@@ -10,8 +10,6 @@ Flota gandolhFleet;
 
 int main() {
 
-	//TODO elimina  ; 
-
 	init();
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	char optiuneSelectata[3];
