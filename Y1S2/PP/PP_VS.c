@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
+#include <cstdio>
 #pragma warning(disable:4996)
 #include "Headers/Structures.h"
 #include "Headers/Gandolhs.h"
