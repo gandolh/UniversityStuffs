@@ -1,0 +1,11 @@
+	IA
+	IR
+	IE
+	IS
+	HI
+	UF
+	AS
+	DS
+	GI
+	RT
+	LL

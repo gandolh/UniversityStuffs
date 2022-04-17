@@ -1,0 +1,3 @@
+University of Bucharest, FSF, IS, Rosu, Cristiano, 14, 22, 11.00
+Universitate X, FSF, IE, Alex, Alex, 14, Cri, 2.22
+University of Bucharest, HGI, IS, Gusatu, Cristian, 14, cnet, 2.22
