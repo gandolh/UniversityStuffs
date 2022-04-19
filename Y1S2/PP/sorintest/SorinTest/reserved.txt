@@ -1,0 +1,2 @@
+Sala mica;80;3000;19 08 2020;20 08 2020;parcare
+Sala mica;80;3000;27 08 2020;29 08 2020;iluminat

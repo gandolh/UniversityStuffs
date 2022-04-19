@@ -1,0 +1,3 @@
+1;Sala mare;180;wifi, parcare, iluminat;9000
+2;Sala medie;120;wifi, parcare, iluminat;4500
+3;Sala mica;80;wifi, ASparcare, iluminat;3000
